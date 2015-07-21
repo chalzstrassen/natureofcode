@@ -1,0 +1,49 @@
+<html>
+<head>
+	<title>Nature of Code</title>
+	<script src="lib/vectors.js"></script>
+	<style>
+		#vector {
+			margin: auto;
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="vector" height='400' width='400'>
+	</canvas>
+	<script>
+	var canvasVector = document.getElementById("vector");
+	var vectorCtx = canvasVector.getContext("2d");
+
+	vectorCtx.beginPath();
+	vectorCtx.arc(50, 50, 20, 0, 2 * Math.PI, false);
+	vectorCtx.stroke();
+	vectorCtx.fill();
+	window.Ball = {
+		x: 25,
+		y: 25,
+		xSpeed: 1.3,
+		ySpeed: 2.1
+	}
+
+	function draw() {
+		Ball.x = Ball.x + Ball.xSpeed;
+		Ball.y = Ball.y + Ball.ySpeed;
+
+		if ((Ball.x > 400) || (Ball.x < 0)) {
+			Ball.xSpeed = -1 * Ball.xSpeed;
+		}
+		if ((Ball.y > 400) || (Ball.y < 0)) {
+			Ball.ySpeed = -1 * Ball.ySpeed;
+		}
+		vectorCtx.clearRect(0, 0, 400, 400);
+		vectorCtx.beginPath();
+		vectorCtx.arc(Ball.x, Ball.y, 10, 0, Math.PI*2, false);
+		vectorCtx.stroke();
+		vectorCtx.fill();
+	}
+	window.setInterval(draw, 20);
+	</script>
+</body>
+</html>
